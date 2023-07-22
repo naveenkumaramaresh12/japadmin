@@ -94,6 +94,16 @@ const CreateProduct = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+
+/*COPY AND PASTE BELOW CODD EVERYWHERE*/
+const loginValue = localStorage.getItem('login_');
+if (loginValue !== null && loginValue === '1') {
+  console.log('ok');
+} else {
+  window.location.href = '/authentication/sign-in/';
+}
+/* copy and paste to everywhere*/
+
     // Fetch categories from the API
     const fetchCategories = async () => {
       const accessToken = localStorage.getItem("accessToken");

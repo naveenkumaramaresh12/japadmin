@@ -279,6 +279,16 @@ export default function User() {
     }
   };
   useEffect(() => {
+
+/*COPY AND PASTE BELOW CODD EVERYWHERE*/
+const loginValue = localStorage.getItem('login_');
+if (loginValue !== null && loginValue === '1') {
+  console.log('ok');
+} else {
+  window.location.href = '/authentication/sign-in/';
+}
+/* copy and paste to everywhere*/
+
     if (currentRow) {
       setName(currentRow.name);
       setSlug(currentRow.slug);
@@ -392,7 +402,7 @@ export default function User() {
               fontWeight: 500,
             }}
           >
-            Cayegory List
+            Categories List
           </Typography>
 
           <Button

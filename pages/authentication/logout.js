@@ -1,8 +1,12 @@
 import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import Button from "@mui/material/Button";
-
+import React, { useState, useEffect } from "react";
 export default function Logout() {
+   useEffect(() => {
+   
+  localStorage.removeItem('login_');
+  }, []);
   return (
     <>
       <div className="authenticationBox">
