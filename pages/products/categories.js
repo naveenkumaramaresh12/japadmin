@@ -231,7 +231,7 @@ export default function User() {
         fetchCategories();
       }
     } catch (error) {
-      console.error("Error creating product:", error.message);
+      console.error("Error creating product:", error.response.data);
     }
   };
 
@@ -275,7 +275,7 @@ export default function User() {
         fetchCategories();
       }
     } catch (error) {
-      console.error("Error creating product:", error.message);
+      console.error("Error creating product:", error.response.data);
     }
   };
   useEffect(() => {
@@ -307,7 +307,6 @@ if (loginValue !== null && loginValue === '1') {
   const [loading, setLoading] = useState(true);
   
   useEffect(() => {
-   
      fetchCategories();
   }, [page, rowsPerPage]);
   const fetchCategories = async () => {
@@ -328,7 +327,7 @@ if (loginValue !== null && loginValue === '1') {
       console.log('Products Fetched for Page', page + 1, response.data.data);
       console.log(response.data.data)
     } catch (error) {
-      throw ("Failed to fetch categories",error);
+      throw ("Failed to fetch categories",error.response.data);
     }
   };
   const handleChangePage = (event, newPage) => {
@@ -368,7 +367,7 @@ if (loginValue !== null && loginValue === '1') {
       fetchCategories();
       console.log(`category with ID ${id} deleted successfully.`);
     } catch (error) {
-      console.error(`Error deleting category with ID ${id}:`, error);
+      console.error(`Error deleting category with ID ${id}:`, error.response.data);
     }
   };
 
@@ -402,7 +401,7 @@ if (loginValue !== null && loginValue === '1') {
               fontWeight: 500,
             }}
           >
-            Categories List
+            Cayegory List
           </Typography>
 
           <Button

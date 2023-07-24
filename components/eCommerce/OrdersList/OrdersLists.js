@@ -96,47 +96,46 @@ const OrdersLists = () =>{
   const [count, setCount] = React.useState(0);
 
   React.useEffect(() => {
-    const accessToken = localStorage.getItem("accessToken");
-
-    const fetchOrders = async () => {
-      try {
-        const response = await axios.get("https://jap.digisole.in/api/v1/order/paginate",
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`, // Replace with your access token variable
-          },
-        }
-        );
-        console.log(response.data)
-        const { data } = response.data;
-        setOrders(data);
-        setCount(data.total);
-      } catch (error) {
-        console.error("Error fetching orders:", error);
-      }
-    };
-
     fetchOrders();
-  }, []);
+  }, [page, rowsPerPage]);
+  const accessToken = localStorage.getItem("accessToken");
+  const fetchOrders = async () => {
+    try {
+      const response = await axios.get(`https://jap.digisole.in/api/v1/order/paginate?page=${page + 1}`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`, // Replace with your access token variable
+        },
+      }
+      );
+      console.log(response.data)
+      const { data } = response.data;
+      setOrders(data);
+      setCount(data.total);
+    console.log('Orders Fetched for Page', page + 1, response.data.data);
 
-  // Select
-  const [select, setSelect] = React.useState("");
-  const handleChange = (event) => {
-    setSelect(event.target.value);
+    } catch (error) {
+      console.error("Error fetching orders:", error);
+    }
   };
-
-  // Avoid a layout jump when reaching the last page with empty rows.
-  const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
-
   const handleChangePage = (event, newPage) => {
-    setPage(newPage);
+    if (newPage < 0) {
+      // Loop to the last page if the user goes to a negative page
+      setPage(Math.max(0, Math.ceil(count / rowsPerPage) - 1));
+    } else if (newPage >= Math.ceil(count / rowsPerPage)) {
+      // Loop to the first page if the user goes beyond the last page
+      setPage(0);
+    } else {
+      // Fetch the products for the new page
+      setPage(newPage);
+    }
   };
-
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, orders.length);
+
 
   return (
     <>
@@ -385,21 +384,13 @@ const OrdersLists = () =>{
            { Array.isArray(orders) && orders.length > 0 && (
               <TableRow>
                 <TablePagination
-                  rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
-                  colSpan={8}
-                  count={orders.length}
-                  rowsPerPage={rowsPerPage}
+                  rowsPerPageOptions={[10, 25, 50]}
+                  count={count}
                   page={page}
-                  SelectProps={{
-                    inputProps: {
-                      "aria-label": "rows per page",
-                    },
-                    native: true,
-                  }}
+                  rowsPerPage={rowsPerPage}
                   onPageChange={handleChangePage}
                   onRowsPerPageChange={handleChangeRowsPerPage}
                   ActionsComponent={OrdersList}
-                  style={{ borderBottom: "none" }}
                 />
               </TableRow>
               )}

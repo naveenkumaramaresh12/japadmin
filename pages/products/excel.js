@@ -224,9 +224,7 @@ const handleSubmit = async (event) => {
   if (excelFile){
     formData.append("excel", excelFile);
   }
-
-  try{
-  
+  try{ 
   const accessToken = localStorage.getItem('accessToken');
     const response = await axios.post(
       'https://jap.digisole.in/api/v1/product/excel/upload',
@@ -242,7 +240,7 @@ const handleSubmit = async (event) => {
     handleClose();
     // TODO: Add any success message or further actions after upload
   } catch (error) {
-    console.error("Upload error:", error);
+    console.error("Upload error:", error.response.data);
     // TODO: Add any error handling or display error message to the user
   }
 };

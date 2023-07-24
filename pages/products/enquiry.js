@@ -220,6 +220,15 @@ const [currentEnquiry, setCurrentEnquiry] = useState(null);
 
   const [enquiries, setEnquiries] = useState([]);
   useEffect(() => {
+/*COPY AND PASTE BELOW CODD EVERYWHERE*/
+const loginValue = localStorage.getItem('login_');
+if (loginValue !== null && loginValue === '1') {
+  console.log('ok');
+} else {
+  window.location.href = '/authentication/sign-in/';
+}
+/* copy and paste to everywhere*/
+
     fetchEnquiries();
   }, []);
 
@@ -235,7 +244,7 @@ const [currentEnquiry, setCurrentEnquiry] = useState(null);
       setEnquiries(response.data.data);
       console.log(response.data.data)
     } catch (error) {
-      console.error('Error fetching enquiries:', error);
+      console.error('Error fetching enquiries:', error.response.data);
       // Handle error
     }
   };
@@ -351,7 +360,7 @@ const [currentEnquiry, setCurrentEnquiry] = useState(null);
         fetchEnquiries();
       }
     } catch (error) {
-      console.error("Error updating enquiry:", error);
+      console.error("Error updating enquiry:", error.response.data);
     }
   };
   useEffect(() => {
@@ -387,14 +396,10 @@ const [currentEnquiry, setCurrentEnquiry] = useState(null);
       // Perform any additional actions after successful deletion
       fetchEnquiries();
     } catch (error) {
-      console.error('Error deleting enquiry:', error);
+      console.error('Error deleting enquiry:', error.response.data);
       // Handle error case
     }
   };
-
-  
-  
-
   return (
     <>
       <Card

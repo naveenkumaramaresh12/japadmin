@@ -243,6 +243,7 @@ if (loginValue !== null && loginValue === '1') {
 }
 /* copy and paste to everywhere*/
 
+
     fetchCoupons();
   }, [page, rowsPerPage]);
   const fetchCoupons = async () => {
@@ -261,7 +262,7 @@ if (loginValue !== null && loginValue === '1') {
       console.log('Coupons Fetched for Page', page + 1, response.data.data);
 
     } catch (error) {
-      console.error('Error fetching coupons:', error);
+      console.error('Error fetching coupons:', error.response.data);
       // Handle error
     }
   };
@@ -330,7 +331,7 @@ if (loginValue !== null && loginValue === '1') {
         fetchCoupons();
       }
     } catch (error) {
-      console.error("Error updating coupon:", error);
+      console.error("Error updating coupon:", error.response.data);
     }
   };
   useEffect(() => {
@@ -345,6 +346,7 @@ if (loginValue !== null && loginValue === '1') {
       // ... set other state variables as needed
     }
   }, [currentRow]);
+
   const handleDelete = async (couponId) => {
     const accessToken = localStorage.getItem("accessToken");
     try {
@@ -358,10 +360,10 @@ if (loginValue !== null && loginValue === '1') {
       setCoupons((prevProducts) =>
         prevProducts.filter((coupon) => coupon.id !== couponId)
       );
-
+      fetchCoupons();
       console.log(`Coupon with ID ${couponId} deleted successfully.`);
     } catch (error) {
-      console.error(`Error deleting coupon with ID ${couponId}:`, error);
+      console.error(`Error deleting coupon with ID ${couponId}:`, error.response.data);
     }
   };
   // End Add Task Modal

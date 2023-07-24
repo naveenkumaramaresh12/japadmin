@@ -224,7 +224,7 @@ const handleSubmit = async (event) => {
       // Add your fetchDeliveryCharges() function here if you have it
     }
   } catch (error) {
-    console.error("Error creating delivery charges:", error);
+    console.error("Error creating delivery charges:", error.response.data);
   }
 };
 
@@ -243,7 +243,7 @@ const handleSubmit = async (event) => {
       setData(response.data.deliveryCharge); 
       console.log(response.data.deliveryCharge)// Assuming the response.data is an array of objects representing the charges
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error('Error fetching data:', error.response.data);
     }
   };
   // Fetch data from the API when the component mounts

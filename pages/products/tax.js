@@ -229,7 +229,7 @@ const handleSubmit = async (event) => {
       // Add your fetchTax() function here if you have it
     }
   } catch (error) {
-    console.error('Error creating tax:', error);
+    console.error('Error creating tax:', error.response.data);
   }
 };
 
@@ -249,20 +249,26 @@ const handleSubmit = async (event) => {
       setRows(response.data.tax); // Assuming the API response contains an array of tax details
       console.log(response.data.tax)
     } catch (error) {
-      console.error('Failed to fetch tax details:', error);
+      console.error('Failed to fetch tax details:', error.response.data);
     }
   };
 
   // Fetch the tax details when the component mounts
   useEffect(() => {
+    /*COPY AND PASTE BELOW CODD EVERYWHERE*/
+    const loginValue = localStorage.getItem('login_');
+    if (loginValue !== null && loginValue === '1') {
+      console.log('ok');
+    } else {
+      window.location.href = '/authentication/sign-in/';
+    }
+/* copy and paste to everywhere*/
     fetchTaxDetails();
   }, []);
   // End Add Task Modal
 
   return (
     <>
-      
-
       <Card
         sx={{
           boxShadow: "none",

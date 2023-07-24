@@ -250,7 +250,7 @@ const handleSubmit = async (event) => {
       // Display a success message or perform other actions
     }
   } catch (error) {
-    console.error('Error creating user:', error);
+    console.error('Error creating user:', error.response.data);
     // Display an error message or perform other error handling
   }
 };
@@ -269,7 +269,7 @@ const handleSubmit = async (event) => {
       fetchData();
       // Perform any additional actions after successful deletion
     } catch (error) {
-      console.error('Error deleting user:', error);
+      console.error('Error deleting user:', error.response.data);
       // Handle error case
     }
   };
@@ -310,10 +310,19 @@ const handleSubmit = async (event) => {
         event.target.reset();
       }
     } catch (error) {
-      console.error('Error creating user:', error);
+      console.error('Error creating user:', error.response.data);
     }
   };
   useEffect(() => {
+/*COPY AND PASTE BELOW CODD EVERYWHERE*/
+const loginValue = localStorage.getItem('login_');
+if (loginValue !== null && loginValue === '1') {
+  console.log('ok');
+} else {
+  window.location.href = '/authentication/sign-in/';
+}
+/* copy and paste to everywhere*/
+
     if (user) {
       setName(user.name);
       setEmail(user.email);
@@ -350,7 +359,7 @@ const handleSubmit = async (event) => {
       console.log('Products Fetched for Page', page + 1, response.data.data);
 
     } catch (error) {
-      console.error('Error fetching users:', error);
+      console.error('Error fetching users:', error.response.data);
       setLoading(false);
       // TODO: Add error handling
     }
@@ -400,11 +409,10 @@ page > 0 ? Math.max(0, (1 + page) * rowsPerPage - users.length) : 0;
       }
       );
       console.log("res",response.data.data)
-
       const fetchedRoles = response.data.data;
       setRoles(fetchedRoles);
     } catch (error) {
-      console.error("Error fetching roles:", error);
+      console.error("Error fetching roles:", error.response.data);
     }
   };
 

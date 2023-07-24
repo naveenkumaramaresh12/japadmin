@@ -209,6 +209,16 @@ export default function User() {
   const [pincode, setPincode] = useState([]);
   
   useEffect(() => {
+
+/*COPY AND PASTE BELOW CODD EVERYWHERE*/
+const loginValue = localStorage.getItem('login_');
+if (loginValue !== null && loginValue === '1') {
+  console.log('ok');
+} else {
+  window.location.href = '/authentication/sign-in/';
+}
+/* copy and paste to everywhere*/
+
      fetchPincode();
   }, []);
 
@@ -235,7 +245,7 @@ export default function User() {
       }
       console.log(response.data.data)
     } catch (error) {
-      throw ("Failed to fetch Pincode",error);
+      throw ("Failed to fetch Pincode",error.response.data);
     }
   };
 
@@ -271,7 +281,7 @@ export default function User() {
       fetchPincode(); 
       }
     } catch (error) {
-      console.error("Error creating pincode:", error);
+      console.error("Error creating pincode:", error.response.data);
     }
   };
 
@@ -309,7 +319,7 @@ export default function User() {
       fetchPincode(); 
     }
     } catch (error) {
-      console.error("Error creating pincode:", error);
+      console.error("Error creating pincode:", error.response.data);
     }
   };
   useEffect(() => {
@@ -340,17 +350,12 @@ export default function User() {
         fetchPincode();
       }
     } catch (error) {
-      console.error("Error deleting pincode:", error);
+      console.error("Error deleting pincode:", error.response.data);
       // Handle error case
     }
   };
-  
-  
-
   return (
     <>
-      
-
       <Card
         sx={{
           boxShadow: "none",

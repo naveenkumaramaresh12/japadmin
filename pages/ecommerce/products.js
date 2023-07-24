@@ -135,8 +135,6 @@ export default function Products() {
   // Table
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
- 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [openedProductId, setOpenedProductId] = useState(null);
   const [openedProduct, setOpenedProduct] = useState(null);
@@ -162,11 +160,8 @@ export default function Products() {
     console.log(row);
 
   };
-  const handleClose = () => setOpen(false);
-  const handleClose2 = () => setOpen2(false);
-
-
- 
+    const handleClose = () => setOpen(false);
+    const handleClose2 = () => setOpen2(false);
     const [productName, setProductName] = useState("");
     const [slug, setSlug] = useState("");
     const [price, setPrice] = useState("");
@@ -179,8 +174,7 @@ export default function Products() {
     const [isBestSale, setIsBestSale] = useState(true);
     const [category, setCategory] = useState("");
     const [inventory, setInventory] = useState("");
-    const [pincode, setPincode] = useState("");
-
+    // const [pincode, setPincode] = useState("");
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
   
@@ -203,7 +197,7 @@ export default function Products() {
           setLoading(false);
           
         } catch (error) {
-          console.error("Error fetching categories:", error);
+          console.error("Error fetching categories:", error.response.data);
           setLoading(false);
         }
       };
@@ -236,12 +230,11 @@ export default function Products() {
       console.log('Products Fetched for Page', page + 1, response.data.data);
 
     } catch (error) {
-      console.error("Failed to fetch products:", error);
+      console.error("Failed to fetch products:", error.response.data);
     }
   };
-  
-  
-const handleChangePage = (event, newPage) => {
+    
+    const handleChangePage = (event, newPage) => {
       if (newPage < 0) {
         // Loop to the last page if the user goes to a negative page
         setPage(Math.max(0, Math.ceil(totalProducts / rowsPerPage) - 1));
@@ -306,7 +299,7 @@ const handleChangePage = (event, newPage) => {
         formData.append("is_best_sale", isBestSale ? "1" : "0");
         formData.append("category[0]", category);
         formData.append("inventory", inventory);
-        formData.append("pincode[0]", pincode);
+        // formData.append("pincode[0]", pincode);
   
         const accessToken = localStorage.getItem("accessToken");
         if (accessToken) {
@@ -338,13 +331,13 @@ const handleChangePage = (event, newPage) => {
           setIsBestSale(false);
           setCategory("");
           setInventory("");
-          setPincode("");
+          // setPincode("");
 
           handleClose();
           fetchProducts();
         }
       } catch (error) {
-        console.error("Error creating product:", error.message);
+        console.error("Error creating product:", error.response.data);
       }
     };
 
@@ -367,7 +360,7 @@ const handleChangePage = (event, newPage) => {
         formData.append("is_best_sale", currentRow.isBestSale ? "1" : "0");
         formData.append("category[0]", currentRow.category);
         formData.append("inventory", currentRow.inventory);
-        formData.append("pincode[0]", currentRow.pincode);
+        // formData.append("pincode[0]", currentRow.pincode);
   
         const accessToken = localStorage.getItem("accessToken");
         if (accessToken && currentRow && currentRow.id) {
@@ -401,18 +394,20 @@ const handleChangePage = (event, newPage) => {
           setIsBestSale(false);
           setCategory("");
           setInventory("");
-          setPincode("");
+          // setPincode("");
 
           handleClose2();
           fetchProducts();
         }
       } catch (error) {
-        console.error("Error creating product:", error.message);
+        console.error("Error creating product:", error.response.data);
+
       }
     };
+
     useEffect(() => {
       if (currentRow) {
-        setProductName(currentRow.productName);
+          setProductName(currentRow.productName);
           setSlug(currentRow.slug);
           setPrice(currentRow.price);
           setDescription(currentRow.description);
@@ -423,7 +418,7 @@ const handleChangePage = (event, newPage) => {
           setIsBestSale(currentRow.isBestSale ? "1" : "0");
           setCategory(currentRow.category);
           setInventory(currentRow.inventory);
-          setPincode(currentRow.pincode);
+          // setPincode(currentRow.pincode);
         // ... set other state variables as needed
       }
     }, [currentRow]);
@@ -441,10 +436,11 @@ const handleChangePage = (event, newPage) => {
       setProducts((prevProducts) =>
         prevProducts.filter((product) => product.id !== id)
       );
+      fetchProducts();
       console.log(id)
       console.log(`Product with ID ${id} deleted successfully.`);
     } catch (error) {
-      console.error(`Error deleting product with ID ${id}:`, error);
+      console.error(`Error deleting product with ID ${id}:`, error.response.data);
     }
   };
   
@@ -1063,7 +1059,7 @@ const handleChangePage = (event, newPage) => {
               />
             </Grid>
 
-            <Grid item xs={12} md={6}>
+            {/* <Grid item xs={12} md={6}>
               <Typography
                 as="h5"
                 sx={{
@@ -1087,7 +1083,7 @@ const handleChangePage = (event, newPage) => {
                   style: { borderRadius: 8 },
                 }}
               />
-            </Grid>
+            </Grid> */}
           </Grid>
 
           <Grid item xs={12} textAlign="end">
@@ -1502,7 +1498,7 @@ const handleChangePage = (event, newPage) => {
               />
             </Grid>
 
-            <Grid item xs={12} md={6}>
+            {/* <Grid item xs={12} md={6}>
               <Typography
                 as="h5"
                 sx={{
@@ -1526,7 +1522,7 @@ const handleChangePage = (event, newPage) => {
                   style: { borderRadius: 8 },
                 }}
               />
-            </Grid>
+            </Grid> */}
           </Grid>
 
           <Grid item xs={12} textAlign="end">
