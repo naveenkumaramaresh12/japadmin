@@ -98,9 +98,12 @@ const OrdersLists = () =>{
   React.useEffect(() => {
     fetchOrders();
   }, [page, rowsPerPage]);
-  const accessToken = localStorage.getItem("accessToken");
+  
   const fetchOrders = async () => {
     try {
+      const accessToken = localStorage.getItem("accessToken");
+
+
       const response = await axios.get(`https://jap.digisole.in/api/v1/order/paginate?page=${page + 1}`,
       {
         headers: {
