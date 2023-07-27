@@ -70,7 +70,7 @@ const SignInForm = () => {
         >
           <Grid item xs={12} md={12} lg={12} xl={12}>
           <img
-                  src="/images/web_logo.png"
+                  src="/images/logo.png"
                   alt="favicon"
                   className="my_logo" 
                   style={{width: "100px"}}
@@ -173,14 +173,14 @@ const SignInForm = () => {
                     />
                   </Grid>
 
-                  {/* <Grid item xs={6} sm={6} textAlign="end">
-                    <Link
+                  <Grid item xs={6} sm={6} textAlign="end">
+                    {/* <Link
                       href="/authentication/forgot-password"
                       className="primaryColor text-decoration-none"
                     >
                       Forgot your password?
-                    </Link>
-                  </Grid> */}
+                    </Link> */}
+                  </Grid>
                 </Grid>
 
                 <Button

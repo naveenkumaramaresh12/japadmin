@@ -279,7 +279,6 @@ export default function User() {
     }
   };
   useEffect(() => {
-
 /*COPY AND PASTE BELOW CODD EVERYWHERE*/
 const loginValue = localStorage.getItem('login_');
 if (loginValue !== null && loginValue === '1') {
@@ -307,6 +306,8 @@ if (loginValue !== null && loginValue === '1') {
   const [loading, setLoading] = useState(true);
   
   useEffect(() => {
+
+
      fetchCategories();
   }, [page, rowsPerPage]);
   const fetchCategories = async () => {

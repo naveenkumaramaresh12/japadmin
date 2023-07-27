@@ -209,8 +209,7 @@ export default function User() {
   const [pincode, setPincode] = useState([]);
   
   useEffect(() => {
-
-/*COPY AND PASTE BELOW CODD EVERYWHERE*/
+    /*COPY AND PASTE BELOW CODD EVERYWHERE*/
 const loginValue = localStorage.getItem('login_');
 if (loginValue !== null && loginValue === '1') {
   console.log('ok');
@@ -218,7 +217,6 @@ if (loginValue !== null && loginValue === '1') {
   window.location.href = '/authentication/sign-in/';
 }
 /* copy and paste to everywhere*/
-
      fetchPincode();
   }, []);
 

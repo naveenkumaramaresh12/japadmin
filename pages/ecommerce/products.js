@@ -407,7 +407,7 @@ export default function Products() {
 
     useEffect(() => {
       if (currentRow) {
-          setProductName(currentRow.productName);
+          setProductName(currentRow.name);
           setSlug(currentRow.slug);
           setPrice(currentRow.price);
           setDescription(currentRow.description);

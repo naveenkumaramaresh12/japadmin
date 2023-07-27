@@ -243,7 +243,6 @@ if (loginValue !== null && loginValue === '1') {
 }
 /* copy and paste to everywhere*/
 
-
     fetchCoupons();
   }, [page, rowsPerPage]);
   const fetchCoupons = async () => {
