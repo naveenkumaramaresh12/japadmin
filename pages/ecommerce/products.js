@@ -162,7 +162,7 @@ export default function Products() {
   };
     const handleClose = () => setOpen(false);
     const handleClose2 = () => setOpen2(false);
-    const [productName, setProductName] = useState("");
+    const [name, setProductName] = useState("");
     const [slug, setSlug] = useState("");
     const [price, setPrice] = useState("");
     const [description, setDescription] = useState("");
@@ -285,7 +285,7 @@ export default function Products() {
   
       try {
         const formData = new FormData();
-        formData.append("name", productName);
+        formData.append("name", name);
         formData.append("slug", slug);
         formData.append("description", description);
         formData.append("is_active", isActive ? "1" : "0");
@@ -346,7 +346,7 @@ export default function Products() {
   
       try {
         const formData = new FormData();
-        formData.append("name", currentRow.productName);
+        formData.append("name", currentRow.name);
         formData.append("slug", currentRow.slug);
         formData.append("description", currentRow.description);
         formData.append("is_active", currentRow.isActive ? "1" : "0");
@@ -358,7 +358,7 @@ export default function Products() {
         formData.append("is_new_arrival", currentRow.isNewArrival ? "1" : "0");
         formData.append("is_featured", currentRow.isFeatured ? "1" : "0");
         formData.append("is_best_sale", currentRow.isBestSale ? "1" : "0");
-        formData.append("category[0]", currentRow.category);
+        formData.append("category[0]", category);
         formData.append("inventory", currentRow.inventory);
         // formData.append("pincode[0]", currentRow.pincode);
   
@@ -416,13 +416,19 @@ export default function Products() {
           setIsNewArrival(currentRow.isNewArrival ? "1" : "0");
           setIsFeatured(currentRow.isFeatured ? "1" : "0");
           setIsBestSale(currentRow.isBestSale ? "1" : "0");
-          setCategory(currentRow.category);
+          if (currentRow && currentRow.categories && currentRow.categories.length > 0) {
+            setCategory(currentRow.categories[0].name);
+          } else {
+            setCategory("");
+          }
           setInventory(currentRow.inventory);
           // setPincode(currentRow.pincode);
         // ... set other state variables as needed
       }
     }, [currentRow]);
-  
+    useEffect(() => {
+      console.log('Category Name:', category);
+    }, [category]);
   const handleDelete = async (id) => {
     const accessToken = localStorage.getItem("accessToken");
       try {
@@ -499,7 +505,7 @@ export default function Products() {
               sx={{ position: "relative", top: "-1px" }}
               className='mr-5px'
             />{" "}
-            Create Folder
+            Create Product
           </Button>
         </Box>
 
@@ -744,14 +750,14 @@ export default function Products() {
                 Product Name
               </Typography>
               <TextField
-                autoComplete="product-name"
-                name="productName"
+                autoComplete="name"
+                name="name"
                 required
                 fullWidth
-                id="productName"
-                label="Product Name"
+                id="name"
+                label="Name"
                 autoFocus
-                value={productName}
+                value={name}
                 onChange={(e) => setProductName(e.target.value)}
                 InputProps={{
                   style: { borderRadius: 8 },
@@ -1148,7 +1154,7 @@ export default function Products() {
                   fontSize: "17px",
                 }}
               >
-                Create Product
+                Update Product
               </Typography>
 
               <IconButton
@@ -1183,14 +1189,14 @@ export default function Products() {
                 Product Name
               </Typography>
               <TextField
-                autoComplete="product-name"
-                name="productName"
+                autoComplete="name"
+                name="name"
                 required
                 fullWidth
-                id="productName"
+                id="name"
                 label="Product Name"
                 autoFocus
-                value={productName}
+                value={name}
                 onChange={(e) => setProductName(e.target.value)}
                 InputProps={{
                   style: { borderRadius: 8 },
@@ -1545,7 +1551,7 @@ export default function Products() {
                 }}
                 className="mr-5px"
               />{" "}
-              Create Product
+              Update Product
             </Button>
           </Grid>
         </Box>
