@@ -314,14 +314,6 @@ const handleSubmit = async (event) => {
     }
   };
   useEffect(() => {
-    /*COPY AND PASTE BELOW CODD EVERYWHERE*/
-const loginValue = localStorage.getItem('login_');
-if (loginValue !== null && loginValue === '1') {
-  console.log('ok');
-} else {
-  window.location.href = '/authentication/sign-in/';
-}
-/* copy and paste to everywhere*/
     if (user) {
       setName(user.name);
       setEmail(user.email);

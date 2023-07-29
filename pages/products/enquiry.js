@@ -220,14 +220,6 @@ const [currentEnquiry, setCurrentEnquiry] = useState(null);
 
   const [enquiries, setEnquiries] = useState([]);
   useEffect(() => {
-    /*COPY AND PASTE BELOW CODD EVERYWHERE*/
-const loginValue = localStorage.getItem('login_');
-if (loginValue !== null && loginValue === '1') {
-  console.log('ok');
-} else {
-  window.location.href = '/authentication/sign-in/';
-}
-/* copy and paste to everywhere*/
     fetchEnquiries();
   }, []);
 

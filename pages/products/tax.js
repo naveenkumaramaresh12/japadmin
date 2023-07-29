@@ -255,14 +255,6 @@ const handleSubmit = async (event) => {
 
   // Fetch the tax details when the component mounts
   useEffect(() => {
-    /*COPY AND PASTE BELOW CODD EVERYWHERE*/
-const loginValue = localStorage.getItem('login_');
-if (loginValue !== null && loginValue === '1') {
-  console.log('ok');
-} else {
-  window.location.href = '/authentication/sign-in/';
-}
-/* copy and paste to everywhere*/
     fetchTaxDetails();
   }, []);
   // End Add Task Modal

@@ -98,12 +98,9 @@ const OrdersLists = () =>{
   React.useEffect(() => {
     fetchOrders();
   }, [page, rowsPerPage]);
-  
   const fetchOrders = async () => {
     try {
       const accessToken = localStorage.getItem("accessToken");
-
-
       const response = await axios.get(`https://jap.digisole.in/api/v1/order/paginate?page=${page + 1}`,
       {
         headers: {
@@ -268,6 +265,16 @@ const OrdersLists = () =>{
     >
       Delivery Charge
     </TableCell>
+    <TableCell
+      align="center"
+      sx={{
+        borderBottom: "1px solid #F7FAFF",
+        fontSize: "13.5px",
+        padding: "16px 10px",
+      }}
+    >
+      Mode Of Payment
+    </TableCell>
 
     <TableCell
       align="center"
@@ -343,11 +350,51 @@ const OrdersLists = () =>{
     >
       Billing Number
     </TableCell>
+    <TableCell
+      align="center"
+      sx={{
+        borderBottom: "1px solid #F7FAFF",
+        fontSize: "13.5px",
+        padding: "16px 10px",
+      }}
+    >
+      Shipping First Name
+    </TableCell>
+
+    <TableCell
+      align="center"
+      sx={{
+        borderBottom: "1px solid #F7FAFF",
+        fontSize: "13.5px",
+        padding: "16px 10px",
+      }}
+    >
+      Shipping Last Name
+    </TableCell>
+    <TableCell
+      align="center"
+      sx={{
+        borderBottom: "1px solid #F7FAFF",
+        fontSize: "13.5px",
+        padding: "16px 10px",
+      }}
+    >
+      Shipping Adresss
+    </TableCell>
+    <TableCell
+      align="center"
+      sx={{
+        borderBottom: "1px solid #F7FAFF",
+        fontSize: "13.5px",
+        padding: "16px 10px",
+      }}
+    >
+      Shipping Number
+    </TableCell>
+    
     {/* Add more TableCells for other properties */}
   </TableRow>
 </TableHead>
-
-
             <TableBody>
                 {Array.isArray(orders) ? (
                   orders.map((order) => (
@@ -360,13 +407,18 @@ const OrdersLists = () =>{
                       <TableCell>{order.total_price_without_gst_delivery_charge}</TableCell>
                       <TableCell>{order.gst_charge}</TableCell>
                       <TableCell>{order.delivery_charge}</TableCell>
+                      <TableCell>{order.mode_of_payment}</TableCell>
                       <TableCell>{order.total_price_with_gst_delivery_charge}</TableCell>
                       <TableCell>{order.coupon_discount}</TableCell>
                       <TableCell>{order.total_price_with_coupon_dicount}</TableCell>
                       <TableCell>{order.billing_first_name}</TableCell>
                       <TableCell>{order.billing_last_name}</TableCell>
-                      <TableCell>{order.billing_address_1}</TableCell>
-                      <TableCell>{order.billing_phone}</TableCell>                      
+                      <TableCell>{order.billing_address_1} {order.billing_address_2}</TableCell>
+                      <TableCell>{order.billing_phone}</TableCell> 
+                      <TableCell>{order.shipping_first_name}</TableCell>
+                      <TableCell>{order.shipping_last_name}</TableCell>
+                      <TableCell>{order.shipping_address_1} {order.shipping_address_2}</TableCell>
+                      <TableCell>{order.shipping_phone}</TableCell>                     
 
                       {/* Add more cells as needed */}
                     </TableRow>

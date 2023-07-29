@@ -279,15 +279,6 @@ export default function User() {
     }
   };
   useEffect(() => {
-/*COPY AND PASTE BELOW CODD EVERYWHERE*/
-const loginValue = localStorage.getItem('login_');
-if (loginValue !== null && loginValue === '1') {
-  console.log('ok');
-} else {
-  window.location.href = '/authentication/sign-in/';
-}
-/* copy and paste to everywhere*/
-
     if (currentRow) {
       setName(currentRow.name);
       setSlug(currentRow.slug);
@@ -306,8 +297,6 @@ if (loginValue !== null && loginValue === '1') {
   const [loading, setLoading] = useState(true);
   
   useEffect(() => {
-
-
      fetchCategories();
   }, [page, rowsPerPage]);
   const fetchCategories = async () => {
