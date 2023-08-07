@@ -190,6 +190,15 @@ const OrdersLists = () =>{
     >
       Order ID
     </TableCell>
+    <TableCell
+      sx={{
+        borderBottom: "1px solid #F7FAFF",
+        fontSize: "13.5px",
+        padding: "16px 10px",
+      }}
+    >
+     Products
+    </TableCell>
 
     <TableCell
       sx={{
@@ -400,6 +409,17 @@ const OrdersLists = () =>{
                   orders.map((order) => (
                     <TableRow key={order.id}>
                       <TableCell>{order.id}</TableCell>
+                      <TableCell>
+          {order.products.length > 0 ? (
+            <ul>
+              {order.products.map((product) => (
+                <li key={product.id}>{product.name}</li>
+              ))}
+            </ul>
+          ) : (
+            <p>No products in this order.</p>
+          )}
+        </TableCell>
                       <TableCell>{order.total_items}</TableCell>
                       <TableCell>{order.total_quantity}</TableCell>
                       <TableCell>{order.sub_total}</TableCell>
@@ -408,7 +428,7 @@ const OrdersLists = () =>{
                       <TableCell>{order.gst_charge}</TableCell>
                       <TableCell>{order.delivery_charge}</TableCell>
                       <TableCell>{order.mode_of_payment}</TableCell>
-                      <TableCell>{order.total_price_with_gst_delivery_charge}</TableCell>
+                      <TableCell>{order.total_price_with_gst_delivery_charge.toFixed(2)}</TableCell>
                       <TableCell>{order.coupon_discount}</TableCell>
                       <TableCell>{order.total_price_with_coupon_dicount}</TableCell>
                       <TableCell>{order.billing_first_name}</TableCell>
