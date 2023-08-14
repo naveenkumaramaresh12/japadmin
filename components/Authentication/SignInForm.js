@@ -9,7 +9,6 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import axios from "axios";
 
-
 const SignInForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -40,8 +39,6 @@ const SignInForm = () => {
       // Store the access token in local storage
       console.log('Access token:', response.data.token);
       localStorage.setItem('accessToken', response.data.token);
-      localStorage.setItem('login_', '1');
-
   
       // Redirect to home page
       window.location.href = '/'; // Replace '/home' with the actual URL of your home page
@@ -81,15 +78,7 @@ const SignInForm = () => {
                 
               </Typography>
 
-              <Typography fontSize="15px" mb="30px">
-                Already have an account?{" "}
-                <Link
-                  href="/authentication/sign-up"
-                  className="primaryColor text-decoration-none"
-                >
-                  Sign up
-                </Link>
-              </Typography>
+              
 
           
 
@@ -164,23 +153,16 @@ const SignInForm = () => {
                 </Box>
 
                 <Grid container alignItems="center" spacing={2}>
-                  <Grid item xs={6} sm={6}>
+                  {/* <Grid item xs={6} sm={6}>
                     <FormControlLabel
                       control={
                         <Checkbox value="allowExtraEmails" color="primary" />
                       }
                       label="Remember me."
                     />
-                  </Grid>
+                  </Grid> */}
 
-                  <Grid item xs={6} sm={6} textAlign="end">
-                    {/* <Link
-                      href="/authentication/forgot-password"
-                      className="primaryColor text-decoration-none"
-                    >
-                      Forgot your password?
-                    </Link> */}
-                  </Grid>
+                 
                 </Grid>
 
                 <Button

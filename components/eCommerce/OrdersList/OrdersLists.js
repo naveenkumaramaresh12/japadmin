@@ -199,7 +199,15 @@ const OrdersLists = () =>{
     >
      Products
     </TableCell>
-
+    <TableCell
+      sx={{
+        borderBottom: "1px solid #F7FAFF",
+        fontSize: "13.5px",
+        padding: "16px 10px",
+      }}
+    >
+     Weight
+    </TableCell>
     <TableCell
       sx={{
         borderBottom: "1px solid #F7FAFF",
@@ -418,6 +426,17 @@ const OrdersLists = () =>{
             </ul>
           ) : (
             <p>No products in this order.</p>
+          )}
+        </TableCell>
+        <TableCell>
+          {order.products.length > 0 ? (
+            <ul>
+              {order.products.map((product) => (
+                <li key={product.id}>{product.weight}</li>
+              ))}
+            </ul>
+          ) : (
+            <p>No products weight.</p>
           )}
         </TableCell>
                       <TableCell>{order.total_items}</TableCell>
