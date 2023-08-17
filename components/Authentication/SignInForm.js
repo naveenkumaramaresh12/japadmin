@@ -67,7 +67,7 @@ const SignInForm = () => {
         >
           <Grid item xs={12} md={12} lg={12} xl={12}>
           <img
-                  src="/images/logo.png"
+                  src="/images/web_logo.png"
                   alt="favicon"
                   className="my_logo" 
                   style={{width: "100px"}}
@@ -78,7 +78,15 @@ const SignInForm = () => {
                 
               </Typography>
 
-              
+              <Typography fontSize="15px" mb="30px">
+                Already have an account?{" "}
+                <Link
+                  href="/authentication/sign-up"
+                  className="primaryColor text-decoration-none"
+                >
+                  Sign up
+                </Link>
+              </Typography>
 
           
 
@@ -153,16 +161,23 @@ const SignInForm = () => {
                 </Box>
 
                 <Grid container alignItems="center" spacing={2}>
-                  {/* <Grid item xs={6} sm={6}>
+                  <Grid item xs={6} sm={6}>
                     <FormControlLabel
                       control={
                         <Checkbox value="allowExtraEmails" color="primary" />
                       }
                       label="Remember me."
                     />
-                  </Grid> */}
+                  </Grid>
 
-                 
+                  <Grid item xs={6} sm={6} textAlign="end">
+                    <Link
+                      href="/authentication/forgot-password"
+                      className="primaryColor text-decoration-none"
+                    >
+                      Forgot your password?
+                    </Link>
+                  </Grid>
                 </Grid>
 
                 <Button
