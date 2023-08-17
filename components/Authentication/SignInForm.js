@@ -9,6 +9,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import axios from "axios";
 
+
 const SignInForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -39,6 +40,8 @@ const SignInForm = () => {
       // Store the access token in local storage
       console.log('Access token:', response.data.token);
       localStorage.setItem('accessToken', response.data.token);
+      localStorage.setItem('login_', '1');
+
   
       // Redirect to home page
       window.location.href = '/'; // Replace '/home' with the actual URL of your home page

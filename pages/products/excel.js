@@ -146,6 +146,34 @@ UsersList.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
+function createData(name, slug, des, status, banner, icon, email, phone,mess) {
+  return {
+    name,
+    slug,
+    des,
+    status,
+    banner,
+    icon,
+    email,
+    phone,mess
+  };
+}
+
+const rows = [
+  createData(
+    "Test User",
+    "this-is-test",
+    "This is a test description",
+    "1",
+    "/images/3d1.png",
+    "/images/1.png",
+    "email@gmail.com",
+    "9876543212",
+    "Hi i am a test message"
+  ),
+
+].sort((a, b) => (a.name < b.name ? -1 : 1));
+
 export default function User() {
   // Table
   const [page, setPage] = React.useState(0);
@@ -216,7 +244,7 @@ const handleSubmit = async (event) => {
     // TODO: Add any error handling or display error message to the user
   }
 };
-
+  // End Add Task Modal
 
   return (
     <>
@@ -269,21 +297,9 @@ const handleSubmit = async (event) => {
             />{" "}
             PRODUCT EXCEL UPLOAD
           </Button>
-          <Button as="a" href="/sample(1).xlsx" download variant="contained" sx={{textTransform: "capitalize",borderRadius: "8px",fontWeight: "500",fontSize: "13px",padding: "12px 20px",color: "#fff !important" ,marginLeft: "10px",textDecoration: "none",}}>
-          Download Sample Excel
-        </Button>
         </Box>
-        <Typography
-    sx={{
-      fontSize: 12,
-      color: "#6B7280",
-      mt: 2,
-    }}
-  >
-    <h2>Instructions</h2>
-    Click the "Download Sample Excel" button to download a sample Excel file for reference. You can also use this as a template for uploading products.
-  </Typography>
 
+       
       </Card>
 
       {/* Create new user modal */}

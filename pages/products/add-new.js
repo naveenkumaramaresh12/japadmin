@@ -25,7 +25,9 @@ const CreateProduct = () => {
   const [isBestSale, setIsBestSale] = useState(true);
   const [category, setCategory] = useState("");
   const [inventory, setInventory] = useState("");
-  const [pincode, setPincode] = useState("");
+  const [weight, setWeight] = useState("");
+  const [weightUnit, setWeightUnit] = useState("kg");
+  // const [pincode, setPincode] = useState("");
 
   const handleFeaturedImageChange = (event) => {
     const file = event.target.files[0];
@@ -51,7 +53,8 @@ const CreateProduct = () => {
       formData.append("is_best_sale", isBestSale ? "1" : "0");
       formData.append("category[0]", category);
       formData.append("inventory", inventory);
-      formData.append("pincode[0]", pincode);
+      // formData.append("pincode[0]", pincode);
+      formData.append("weight", `${weight} ${weightUnit}`);
 
       const accessToken = localStorage.getItem("accessToken");
       if (accessToken) {
@@ -83,7 +86,10 @@ const CreateProduct = () => {
         setIsBestSale(false);
         setCategory("");
         setInventory("");
-        setPincode("");
+        // setPincode("");
+        setWeight("");
+        setWeightUnit("");
+
       }
     } catch (error) {
       console.error("Error creating product:", error);
@@ -94,6 +100,14 @@ const CreateProduct = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    /*COPY AND PASTE BELOW CODD EVERYWHERE*/
+    const loginValue = localStorage.getItem('login_');
+    if (loginValue !== null && loginValue === '1') {
+      console.log('ok');
+    } else {
+      window.location.href = '/authentication/sign-in/';
+    }
+/* copy and paste to everywhere*/
     // Fetch categories from the API
     const fetchCategories = async () => {
       const accessToken = localStorage.getItem("accessToken");
@@ -472,30 +486,48 @@ const CreateProduct = () => {
             </Grid>
 
             <Grid item xs={12} md={6}>
-              <Typography
-                as="h5"
-                sx={{
-                  fontWeight: "500",
-                  fontSize: "14px",
-                  mb: "12px",
-                }}
-              >
-                Pincode
-              </Typography>
-              <TextField
-                autoComplete="pincode"
-                name="pincode"
-                required
-                fullWidth
-                id="pincode"
-                label="Pincode"
-                value={pincode}
-                onChange={(e) => setPincode(e.target.value)}
-                InputProps={{
-                  style: { borderRadius: 8 },
-                }}
-              />
-            </Grid>
+        <Typography
+          as="h5"
+          sx={{
+            fontWeight: "500",
+            fontSize: "14px",
+            mb: "12px",
+          }}
+        >
+          Weight
+        </Typography>
+        <Grid container spacing={1} alignItems="center">
+          <Grid item xs={8}>
+            <TextField
+              autoComplete="weight"
+              name="weight"
+              required
+              fullWidth
+              id="weight"
+              label="Weight"
+              type="number"
+              value={weight}
+              onChange={(e) => setWeight(e.target.value)}
+              InputProps={{
+                style: { borderRadius: 8 },
+              }}
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <TextField
+              select
+              fullWidth
+              value={weightUnit}
+              onChange={(e) => setWeightUnit(e.target.value)}
+            >
+              <MenuItem value="kg">kg</MenuItem>
+              <MenuItem value="g">grams</MenuItem>
+              <MenuItem value="lb">pounds</MenuItem>
+              {/* Add more units as needed */}
+            </TextField>
+          </Grid>
+        </Grid>
+      </Grid>
           </Grid>
 
           <Grid item xs={12} textAlign="end">
