@@ -365,7 +365,7 @@ export default function Products() {
       formData.append("is_best_sale", currentRow.isBestSale ? "1" : "0");
       formData.append("category[0]", category);
       formData.append("inventory", currentRow.inventory);
-      formData.append("weight", `${currentRow.weight} ${currentRow.weightUnit}`);
+      formData.append("weight", `${weight} ${weightUnit}`);
       // formData.append("pincode[0]", currentRow.pincode);
 
       const accessToken = localStorage.getItem("accessToken");
