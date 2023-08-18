@@ -354,7 +354,7 @@ export default function Products() {
       formData.append("name", currentRow.name);
       formData.append("slug", currentRow.slug);
       formData.append("description", currentRow.description);
-      formData.append("is_active", currentRow.isActive ? "1" : "0");
+      formData.append("is_active", isActive ? "1" : "0");
       if (featuredImage) {
         formData.append("featured_image", featuredImage);
       }
